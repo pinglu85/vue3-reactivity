@@ -62,7 +62,6 @@ function effect(eff) {
 }
 
 const product = reactive({ price: 5, quantity: 2 });
-const user = reactive({ firstName: 'John', lastName: 'Doe' });
 
 effect(() => {
   const total = product.price * product.quantity;
@@ -70,13 +69,7 @@ effect(() => {
 });
 
 effect(() => {
-  const userName = `${user.firstName} ${user.lastName}`;
-  console.log(`userName = ${userName}`);
-});
-
-effect(() => {
   console.log(`Updated quantity to = ${product.quantity}`);
 });
 
 product.price = 10;
-user.firstName = 'Ping';
