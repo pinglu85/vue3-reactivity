@@ -68,8 +68,4 @@ effect(() => {
   console.log(`total = ${total}`);
 });
 
-effect(() => {
-  console.log(`Updated quantity to = ${product.quantity}`);
-});
-
 product.price = 10;
