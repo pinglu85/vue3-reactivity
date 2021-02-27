@@ -2,6 +2,10 @@ const targetMap = new WeakMap();
 let activeEffect = null;
 
 function track(target, key) {
+  if (!activeEffect) {
+    return;
+  }
+
   let depsMap = targetMap.get(target);
   if (!depsMap) {
     depsMap = new Map();
@@ -14,9 +18,7 @@ function track(target, key) {
     depsMap.set(key, dep);
   }
 
-  if (activeEffect) {
-    dep.add(activeEffect);
-  }
+  dep.add(activeEffect);
 }
 
 function trigger(target, key) {
