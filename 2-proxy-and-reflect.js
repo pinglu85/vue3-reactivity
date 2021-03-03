@@ -4,14 +4,12 @@ let effect = null;
 function track(target, key) {
   let depsMap = targetMap.get(target);
   if (!depsMap) {
-    depsMap = new Map();
-    targetMap.set(target, depsMap);
+    targetMap.set(target, (depsMap = new Map()));
   }
 
   let dep = depsMap.get(key);
   if (!dep) {
-    dep = new Set();
-    depsMap.set(key, dep);
+    depsMap.set(key, (dep = new Set()));
   }
 
   dep.add(effect);
