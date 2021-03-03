@@ -1,0 +1,64 @@
+const targetMap = new WeakMap();
+let effect = null;
+
+function track(target, key) {
+  let depsMap = targetMap.get(target);
+  if (!depsMap) {
+    depsMap = new Map();
+    targetMap.set(target, depsMap);
+  }
+
+  let dep = depsMap.get(key);
+  if (!dep) {
+    dep = new Set();
+    depsMap.set(key, dep);
+  }
+
+  dep.add(effect);
+}
+
+function trigger(target, key) {
+  const depsMap = targetMap.get(target);
+  if (!depsMap) {
+    return;
+  }
+
+  const dep = depsMap.get(key);
+  if (dep) {
+    dep.forEach((effect) => {
+      effect();
+    });
+  }
+}
+
+function reactive(target) {
+  const handler = {
+    get(target, key, receiver) {
+      const result = Reflect.get(target, key, receiver);
+      track(target, key);
+      return result;
+    },
+    set(target, key, value, receiver) {
+      const oldValue = target[key];
+      const isSetSuccessful = Reflect.set(target, key, value, receiver);
+      if (isSetSuccessful && value !== oldValue) {
+        trigger(target, key);
+      }
+      return isSetSuccessful;
+    },
+  };
+
+  return new Proxy(target, handler);
+}
+
+const product = reactive({ price: 5, quantity: 2 });
+let total = 0;
+effect = () => {
+  total = product.price * product.quantity;
+};
+
+effect();
+console.log(total);
+
+product.quantity = 3;
+console.log(total);
