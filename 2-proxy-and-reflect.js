@@ -1,4 +1,4 @@
-// The WeakMap stores {target -> key -> dep} connections.
+// The WeakMap that stores {target -> key -> dep} connections.
 const targetMap = new WeakMap();
 let effect = null;
 
