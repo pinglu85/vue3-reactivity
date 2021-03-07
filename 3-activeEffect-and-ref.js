@@ -18,13 +18,13 @@ function track(target, key) {
   }
 
   dep.add(activeEffect);
-  console.log('[FUNC TRACK] ACTIVE_EFFECT', activeEffect);
-  console.log('[FUNC TRACK] TARGET', target);
-  console.log('[FUNC TRACK] DEP', dep);
+  console.log('[FUNC TRACK] ACTIVE_EFFECT = ', activeEffect);
+  console.log('[FUNC TRACK] TARGET = ', target);
+  console.log('[FUNC TRACK] DEP = ', dep);
 }
 
 function trigger(target, key) {
-  console.log('[FUNC TRIGGER] TARGET', target);
+  console.log('[FUNC TRIGGER] TARGET = ', target);
   const depsMap = targetMap.get(target);
 
   if (!depsMap) {
@@ -32,7 +32,7 @@ function trigger(target, key) {
   }
 
   const dep = depsMap.get(key);
-  console.log('[FUNC TRIGGER] DEP', dep);
+  console.log('[FUNC TRIGGER] DEP = ', dep);
   if (dep) {
     dep.forEach((innerEffect) => {
       effect(innerEffect);
@@ -61,7 +61,7 @@ function reactive(target) {
 }
 
 function effect(eff) {
-  console.log('[FUNC EFFECT] ACTIVE_EFFECT', eff);
+  console.log('[FUNC EFFECT] ACTIVE_EFFECT = ', eff);
   activeEffect = eff;
   activeEffect();
   activeEffect = null;
@@ -129,7 +129,7 @@ effect(() => {
 
 effect(() => {
   salePrice.value = product.price * 0.9;
-  // console.log(`sale price = ${salePrice.value}`);
+  console.log(`sale price = ${salePrice.value}`);
 });
 
 product.price = 10;
