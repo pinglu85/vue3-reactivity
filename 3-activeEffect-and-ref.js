@@ -20,11 +20,14 @@ function track(target, key) {
   dep.add(activeEffect);
   console.log('[FUNC TRACK] ACTIVE_EFFECT = ', activeEffect);
   console.log('[FUNC TRACK] TARGET = ', target);
+  console.log('[FUNC TRACK] KEY = ', key);
   console.log('[FUNC TRACK] DEP = ', dep);
+  console.log('[FUNC TRACK] TARGET_MAP = ', targetMap);
 }
 
 function trigger(target, key) {
   console.log('[FUNC TRIGGER] TARGET = ', target);
+  console.log('[FUNC TRIGGER] KEY = ', key);
   const depsMap = targetMap.get(target);
 
   if (!depsMap) {
