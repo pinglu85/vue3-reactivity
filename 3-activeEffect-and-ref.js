@@ -130,6 +130,8 @@ effect(() => {
   console.log(`total = ${total}`);
 });
 
+// Even though salePrice.value is read in the anonymous function,
+// the function will not be stored as value's dependency.
 effect(() => {
   salePrice.value = product.price * 0.9;
   console.log(`sale price = ${salePrice.value}`);
