@@ -114,12 +114,8 @@ class Ref {
   }
 }
 
-function createRef(rawValue) {
-  return new Ref(rawValue);
-}
-
 function ref(rawValue) {
-  return createRef(rawValue);
+  return new Ref(rawValue);
 }
 
 const product = reactive({ price: 5, quantity: 2 });
