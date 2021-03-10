@@ -30,6 +30,9 @@ function trigger(target, key) {
   }
 }
 
+// Using Proxy & Reflect not only allows us to add properties later that we
+// want to be reactive, but also improves the performance - nested objects
+// are only converted as need it when you access them.
 function reactive(target) {
   const handler = {
     get(target, key, receiver) {
